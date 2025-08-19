@@ -77,7 +77,7 @@ export default function Home() {
               </div>
               <h3 className="text-2xl font-semibold text-white mb-4">Personal Preferences</h3>
               <p className="text-white/70">
-                Tell us what you love, hate, and can't eat. Our AI learns your taste profile to make perfect recommendations.
+                Tell us what you love, hate, and can&apos;t eat. Our AI learns your taste profile to make perfect recommendations.
               </p>
             </div>
             
@@ -87,7 +87,7 @@ export default function Home() {
               </div>
               <h3 className="text-2xl font-semibold text-white mb-4">Safety First</h3>
               <p className="text-white/70">
-                Set your allergies and dietary restrictions once. We'll flag any potential issues and suggest safe alternatives.
+                Set your allergies and dietary restrictions once. We&apos;ll flag any potential issues and suggest safe alternatives.
               </p>
             </div>
             
@@ -151,7 +151,7 @@ export default function Home() {
                     </div>
                     <p className="text-sm text-gray-600 mb-2">Warm chocolate cake with vanilla ice cream</p>
                     <p className="text-xs text-blue-700 bg-blue-100 px-2 py-1 rounded inline-block">
-                      Similar to desserts you've enjoyed at other restaurants
+                      Similar to desserts you&apos;ve enjoyed at other restaurants
                     </p>
                   </div>
                 </div>
@@ -182,7 +182,7 @@ export default function Home() {
                   </div>
                   <p className="text-sm text-gray-600">
                     Start with the Grilled Salmon - it perfectly matches your seafood preference and dietary needs. 
-                    For dessert, the Chocolate Lava Cake is similar to items you've rated highly before.
+                    For dessert, the Chocolate Lava Cake is similar to items you&apos;ve rated highly before.
                   </p>
                 </div>
               </div>
@@ -198,7 +198,7 @@ export default function Home() {
             Ready to Never Struggle with Menus Again?
           </h2>
           <p className="text-xl text-white/90 mb-8">
-            Join thousands of food lovers who've discovered their perfect meals with Palate.
+            Join thousands of food lovers who&apos;ve discovered their perfect meals with Palate.
           </p>
           <button className="bg-white text-primary-600 px-12 py-4 rounded-xl font-semibold text-lg hover:bg-gray-50 transition-colors">
             Get Started Free

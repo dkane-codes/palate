@@ -153,9 +153,10 @@ export default function Dashboard() {
         </div>
       )}
 
-      {/* Desktop Sidebar */}
-      <div className="hidden lg:flex">
-        <div className="w-64 bg-dark-100/70 backdrop-blur-md border-r border-white/10 min-h-screen" style={{ boxShadow: '0 0 40px rgba(0, 0, 0, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.05)' }}>
+      {/* Desktop Layout */}
+      <div className="hidden lg:flex min-h-screen">
+        {/* Desktop Sidebar */}
+        <div className="w-64 bg-dark-100/70 backdrop-blur-md border-r border-white/10" style={{ boxShadow: '0 0 40px rgba(0, 0, 0, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.05)' }}>
           <div className="p-6">
             <nav className="space-y-2">
               <button
@@ -194,17 +195,16 @@ export default function Dashboard() {
             </nav>
           </div>
         </div>
-      </div>
 
-      {/* Main Content */}
-      <div className="lg:ml-64">
-        <div className="p-4 lg:p-8">
+        {/* Desktop Main Content */}
+        <div className="flex-1">
+          <div className="p-8">
           {selectedTab === 'overview' && (
             <div className="space-y-6">
               {/* Mobile-First Quick Actions */}
-              <div className="text-center py-8">
-                <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">Ready to order?</h2>
-                <p className="text-gray-400 text-base lg:text-lg mb-8">Get instant menu recommendations</p>
+              <div className="text-center py-12">
+                <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">Ready to order?</h2>
+                <p className="text-gray-400 text-base lg:text-lg mb-10">Get instant menu recommendations</p>
                 
                 {/* Action Buttons */}
                 <div className="grid grid-cols-1 gap-3">
@@ -272,6 +272,202 @@ export default function Dashboard() {
 
               {/* Stats Grid - Mobile Optimized */}
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="bg-dark-100/60 backdrop-blur-md rounded-2xl p-4 border border-white/10" style={{ boxShadow: '0 25px 50px rgba(0, 0, 0, 0.4), 0 8px 20px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.08)' }}>
+                  <div className="text-center">
+                    <div className="w-10 h-10 bg-primary-500/20 rounded-xl flex items-center justify-center mx-auto mb-2">
+                      <DocumentTextIcon className="w-5 h-5 text-primary-400" />
+                    </div>
+                    <p className="text-2xl font-bold text-white">{stats.totalAnalyses}</p>
+                    <p className="text-xs text-gray-400">Analyses</p>
+                  </div>
+                </div>
+
+                <div className="bg-dark-100/60 backdrop-blur-md rounded-2xl p-4 border border-white/10" style={{ boxShadow: '0 25px 50px rgba(0, 0, 0, 0.4), 0 8px 20px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.08)' }}>
+                  <div className="text-center">
+                    <div className="w-10 h-10 bg-green-500/20 rounded-xl flex items-center justify-center mx-auto mb-2">
+                      <HeartIcon className="w-5 h-5 text-green-400" />
+                    </div>
+                    <p className="text-2xl font-bold text-white">{stats.favoriteRestaurants}</p>
+                    <p className="text-xs text-gray-400">Favorites</p>
+                  </div>
+                </div>
+
+                <div className="bg-dark-100/60 backdrop-blur-md rounded-2xl p-4 border border-white/10" style={{ boxShadow: '0 25px 50px rgba(0, 0, 0, 0.4), 0 8px 20px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.08)' }}>
+                  <div className="text-center">
+                    <div className="w-10 h-10 bg-purple-500/20 rounded-xl flex items-center justify-center mx-auto mb-2">
+                      <StarIcon className="w-5 h-5 text-purple-400" />
+                    </div>
+                    <p className="text-2xl font-bold text-white">{stats.savedDishes}</p>
+                    <p className="text-xs text-gray-400">Saved</p>
+                  </div>
+                </div>
+
+                <div className="bg-dark-100/60 backdrop-blur-md rounded-2xl p-4 border border-white/10" style={{ boxShadow: '0 25px 50px rgba(0, 0, 0, 0.4), 0 8px 20px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.08)' }}>
+                  <div className="text-center">
+                    <div className="w-10 h-10 bg-yellow-500/20 rounded-xl flex items-center justify-center mx-auto mb-2">
+                      <ChartBarIcon className="w-5 h-5 text-yellow-400" />
+                    </div>
+                    <p className="text-2xl font-bold text-white">{stats.avgMatchScore}</p>
+                    <p className="text-xs text-gray-400">Avg Score</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Recent Analyses - Mobile Optimized */}
+              <div className="bg-dark-100/60 backdrop-blur-md rounded-2xl border border-white/10" style={{ boxShadow: '0 30px 60px rgba(0, 0, 0, 0.4), 0 12px 25px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.02)' }}>
+                <div className="p-4 border-b border-white/10">
+                  <h3 className="text-lg font-semibold text-white">Recent Analyses</h3>
+                </div>
+                <div className="p-4">
+                  <div className="space-y-3">
+                    {recentAnalyses.map((analysis) => (
+                      <div key={analysis.id} className="p-4 border border-dark-300 bg-dark-100 rounded-xl hover:border-primary-400 transition-colors">
+                        <div className="flex items-start justify-between mb-2">
+                          <h4 className="font-semibold text-white">{analysis.restaurant}</h4>
+                          <button 
+                            onClick={() => router.push(`/restaurant/${analysis.id}`)}
+                            className="text-primary-400 hover:text-primary-300 text-sm font-medium"
+                          >
+                            View
+                          </button>
+                        </div>
+                        <div className="flex items-center gap-3 text-sm text-gray-400">
+                          <span className="flex items-center gap-1">
+                            <ClockIcon className="w-4 h-4" />
+                            {new Date(analysis.date).toLocaleDateString()}
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <StarIcon className="w-4 h-4 text-green-400" />
+                            {analysis.matches}
+                          </span>
+                          {analysis.warnings > 0 && (
+                            <span className="flex items-center gap-1">
+                              <ExclamationTriangleIcon className="w-4 h-4 text-yellow-400" />
+                              {analysis.warnings}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {selectedTab === 'analyses' && (
+            <div className="space-y-6">
+              <div className="flex items-center justify-between">
+                <h2 className="text-3xl font-bold text-white">Menu Analyses</h2>
+                <button className="bg-gradient-neon hover:bg-primary-600 text-dark-500 px-6 py-3 rounded-xl font-semibold flex items-center gap-2 transition-colors">
+                  <CameraIcon className="w-5 h-5" />
+                  New Analysis
+                </button>
+              </div>
+              <div className="bg-dark-100/60 backdrop-blur-md rounded-2xl border border-white/10 p-8 text-center" style={{ boxShadow: '0 30px 60px rgba(0, 0, 0, 0.4), 0 12px 25px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.02)' }}>
+                <DocumentTextIcon className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold text-white mb-2">All Your Menu Analyses</h3>
+                <p className="text-gray-400 mb-6">Detailed view of all your restaurant menu analyses and recommendations.</p>
+                <button className="bg-gradient-neon hover:bg-primary-600 text-dark-500 px-6 py-3 rounded-xl font-semibold">
+                  Coming Soon
+                </button>
+              </div>
+            </div>
+          )}
+
+          {selectedTab === 'preferences' && (
+            <div className="space-y-6">
+              <h2 className="text-3xl font-bold text-white">Food Preferences</h2>
+              <div className="bg-dark-100/60 backdrop-blur-md rounded-2xl border border-white/10 p-8 text-center" style={{ boxShadow: '0 30px 60px rgba(0, 0, 0, 0.4), 0 12px 25px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.02)' }}>
+                <HeartIcon className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold text-white mb-2">Manage Your Preferences</h3>
+                <p className="text-gray-400 mb-6">Set your dietary restrictions, allergies, and food preferences to get better recommendations.</p>
+                <button className="bg-gradient-neon hover:bg-primary-600 text-dark-500 px-6 py-3 rounded-xl font-semibold">
+                  Coming Soon
+                </button>
+              </div>
+            </div>
+          )}
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Content */}
+      <div className="lg:hidden">
+        <div className="p-4">
+          {selectedTab === 'overview' && (
+            <div className="space-y-6">
+              {/* Mobile-First Quick Actions */}
+              <div className="text-center py-12">
+                <h2 className="text-3xl font-bold text-white mb-6">Ready to order?</h2>
+                <p className="text-gray-400 text-base mb-10">Get instant menu recommendations</p>
+                
+                {/* Action Buttons */}
+                <div className="grid grid-cols-1 gap-3">
+                  <button 
+                    className="font-semibold p-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 transform hover:scale-105"
+                    style={{
+                      background: 'linear-gradient(135deg, #6B7280 0%, #4B5563 100%)',
+                      boxShadow: 'inset 0 1px 2px rgba(255, 255, 255, 0.1), inset 0 -1px 2px rgba(0, 0, 0, 0.2)',
+                      color: '#F3F4F6'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = 'linear-gradient(135deg, #4B5563 0%, #374151 100%)'
+                      e.currentTarget.style.boxShadow = 'inset 0 1px 2px rgba(255, 255, 255, 0.15), inset 0 -1px 2px rgba(0, 0, 0, 0.25)'
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = 'linear-gradient(135deg, #6B7280 0%, #4B5563 100%)'
+                      e.currentTarget.style.boxShadow = 'inset 0 1px 2px rgba(255, 255, 255, 0.1), inset 0 -1px 2px rgba(0, 0, 0, 0.2)'
+                    }}
+                  >
+                    <CameraIcon className="w-6 h-6" />
+                    Photo Menu
+                  </button>
+                  <div className="grid grid-cols-2 gap-3">
+                    <button 
+                      className="font-semibold p-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 transform hover:scale-105"
+                      style={{
+                        background: 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)',
+                        boxShadow: 'inset 0 1px 2px rgba(255, 255, 255, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1)',
+                        color: '#0A0B0D'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = 'linear-gradient(135deg, #22FFD3 0%, #00FFB8 100%)'
+                        e.currentTarget.style.boxShadow = 'inset 0 1px 2px rgba(255, 255, 255, 0.3), inset 0 -1px 2px rgba(0, 0, 0, 0.15)'
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)'
+                        e.currentTarget.style.boxShadow = 'inset 0 1px 2px rgba(255, 255, 255, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1)'
+                      }}
+                    >
+                      <PhotoIcon className="w-6 h-6" />
+                      Upload File
+                    </button>
+                    <button 
+                      className="font-semibold p-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 transform hover:scale-105"
+                      style={{
+                        background: 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)',
+                        boxShadow: 'inset 0 1px 2px rgba(255, 255, 255, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1)',
+                        color: '#0A0B0D'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = 'linear-gradient(135deg, #22FFD3 0%, #00FFB8 100%)'
+                        e.currentTarget.style.boxShadow = 'inset 0 1px 2px rgba(255, 255, 255, 0.3), inset 0 -1px 2px rgba(0, 0, 0, 0.15)'
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)'
+                        e.currentTarget.style.boxShadow = 'inset 0 1px 2px rgba(255, 255, 255, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1)'
+                      }}
+                    >
+                      <LinkIcon className="w-6 h-6" />
+                      Menu Link
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Stats Grid - Mobile Optimized */}
+              <div className="grid grid-cols-2 gap-4">
                 <div className="bg-dark-100/60 backdrop-blur-md rounded-2xl p-4 border border-white/10" style={{ boxShadow: '0 25px 50px rgba(0, 0, 0, 0.4), 0 8px 20px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.08)' }}>
                   <div className="text-center">
                     <div className="w-10 h-10 bg-primary-500/20 rounded-xl flex items-center justify-center mx-auto mb-2">

@@ -146,7 +146,7 @@ export default function Home() {
                       <h4 className="font-semibold text-gray-900">Chocolate Lava Cake</h4>
                       <div className="flex items-center gap-1">
                         <HeartIcon className="w-4 h-4 text-blue-500" />
-                        <span className="text-sm text-blue-600 font-medium">You'll Love This</span>
+                        <span className="text-sm text-blue-600 font-medium">You&apos;ll Love This</span>
                       </div>
                     </div>
                     <p className="text-sm text-gray-600 mb-2">Warm chocolate cake with vanilla ice cream</p>

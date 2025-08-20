@@ -1,0 +1,21 @@
+<svg viewBox="0 0 32 32" fill="white" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fork prongs -->
+  <rect x="12" y="4" width="1.5" height="8" rx="0.75" />
+  <rect x="15" y="4" width="1.5" height="8" rx="0.75" />
+  <rect x="18" y="4" width="1.5" height="8" rx="0.75" />
+  
+  <!-- Fork base connecting prongs -->
+  <rect x="12" y="11" width="7.5" height="2" rx="1" />
+  
+  <!-- Sine wave handle -->
+  <path 
+    d="M 16 13 C 18 13, 18 16, 16 16 C 14 16, 14 19, 16 19 C 18 19, 18 22, 16 22 C 14 22, 14 25, 16 25" 
+    fill="none" 
+    stroke="white" 
+    stroke-width="2.5" 
+    stroke-linecap="round"
+  />
+  
+  <!-- Handle end cap -->
+  <circle cx="16" cy="26" r="1.5" />
+</svg>

@@ -4,26 +4,30 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { 
   CameraIcon,
-  PhotoIcon,
+  MagnifyingGlassIcon,
   LinkIcon,
   ClockIcon,
   StarIcon,
-  UserIcon,
   Cog6ToothIcon,
-  HomeIcon,
   DocumentTextIcon,
   HeartIcon,
   ExclamationTriangleIcon,
   ChartBarIcon,
   Bars3Icon,
-  PlusIcon
+  PlusIcon,
+  CheckIcon,
+  SparklesIcon
 } from '@heroicons/react/24/outline'
+import { UserIcon } from '@heroicons/react/24/solid'
+import PalateLogo from '@/components/PalateLogo'
 
 export default function Dashboard() {
   const router = useRouter()
   const [selectedTab, setSelectedTab] = useState('overview')
   const [showMenu, setShowMenu] = useState(false)
   const [scrollY, setScrollY] = useState(0)
+  const [showLinkInput, setShowLinkInput] = useState(false)
+  const [menuLink, setMenuLink] = useState('')
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY)
@@ -63,7 +67,7 @@ export default function Dashboard() {
     totalAnalyses: 24,
     favoriteRestaurants: 8,
     savedDishes: 47,
-    avgMatchScore: 8.5
+    topDish: 'Grilled Salmon'
   }
 
   return (
@@ -86,7 +90,7 @@ export default function Dashboard() {
       }}
     >
       {/* Mobile Header */}
-      <nav className="bg-dark-100/60 backdrop-blur-xl border-b border-white/10 px-4 py-3 sticky top-0 z-10" style={{ boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05)' }}>
+      <nav className="bg-dark-100/60 backdrop-blur-xl border-b border-white/10 px-4 py-2 sticky top-0 z-10" style={{ boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05)' }}>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <button 
@@ -95,15 +99,19 @@ export default function Dashboard() {
             >
               <Bars3Icon className="w-6 h-6" />
             </button>
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-neon rounded-lg flex items-center justify-center">
-                <HomeIcon className="w-5 h-5 text-dark-500" />
-              </div>
-              <h1 className="text-lg lg:text-2xl font-bold text-white">Palate</h1>
-            </div>
+            <button 
+              onClick={() => router.push('/')}
+              className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+            >
+              <PalateLogo className="w-6 h-6 lg:w-8 lg:h-8 text-white" />
+              <h1 className="text-lg lg:text-2xl text-white" style={{ fontWeight: 900 }}>Palate</h1>
+            </button>
           </div>
           <div className="flex items-center gap-2">
-            <button className="p-2 text-gray-400 hover:text-primary-400 rounded-lg hover:bg-dark-200 transition-colors">
+            <button 
+              onClick={() => router.push('/profile')}
+              className="p-2 text-white hover:text-primary-400 rounded-lg hover:bg-dark-200 transition-colors"
+            >
               <UserIcon className="w-6 h-6" />
             </button>
           </div>
@@ -111,61 +119,114 @@ export default function Dashboard() {
       </nav>
 
       {/* Mobile Menu Overlay */}
-      {showMenu && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 z-20 lg:hidden" onClick={() => setShowMenu(false)}>
-          <div className="bg-dark-100/80 backdrop-blur-xl w-64 h-full p-6 border-r border-white/10" style={{ boxShadow: '0 20px 40px rgba(0, 0, 0, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.06)' }} onClick={e => e.stopPropagation()}>
+      <div className={`fixed inset-0 z-20 lg:hidden transition-all duration-300 ${showMenu ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm transition-all duration-300" onClick={() => setShowMenu(false)}></div>
+        <div 
+          className={`bg-dark-100/60 backdrop-blur-md w-64 h-full p-6 border-r border-white/10 transition-all duration-300 ease-out transform ${showMenu ? 'translate-x-0' : '-translate-x-full'}`}
+          style={{ boxShadow: '0 30px 60px rgba(0, 0, 0, 0.4), 0 12px 25px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.02)' }} 
+          onClick={e => e.stopPropagation()}
+        >
             <nav className="space-y-2">
               <button
                 onClick={() => {setSelectedTab('overview'); setShowMenu(false)}}
-                className={`w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left transition-colors ${
-                  selectedTab === 'overview' 
-                    ? 'bg-primary-500/20 text-primary-400' 
-                    : 'text-gray-300 hover:bg-dark-200 hover:text-white'
-                }`}
+                className={`w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left transition-colors font-medium`}
+                style={selectedTab === 'overview' ? {
+                  background: 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)',
+                  boxShadow: 'inset 0 1px 1px rgba(255, 255, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.1)',
+                  color: '#0A0B0D'
+                } : {
+                  color: '#D1D5DB'
+                }}
+                onMouseEnter={(e) => {
+                  if (selectedTab !== 'overview') {
+                    e.currentTarget.style.backgroundColor = 'rgba(63, 63, 70, 0.5)'
+                    e.currentTarget.style.color = 'white'
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (selectedTab !== 'overview') {
+                    e.currentTarget.style.backgroundColor = 'transparent'
+                    e.currentTarget.style.color = '#D1D5DB'
+                  }
+                }}
               >
                 <ChartBarIcon className="w-5 h-5" />
                 Overview
               </button>
               <button
                 onClick={() => {setSelectedTab('analyses'); setShowMenu(false)}}
-                className={`w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left transition-colors ${
-                  selectedTab === 'analyses' 
-                    ? 'bg-primary-500/20 text-primary-400' 
-                    : 'text-gray-300 hover:bg-dark-200 hover:text-white'
-                }`}
+                className={`w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left transition-colors font-medium`}
+                style={selectedTab === 'analyses' ? {
+                  background: 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)',
+                  boxShadow: 'inset 0 1px 1px rgba(255, 255, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.1)',
+                  color: '#0A0B0D'
+                } : {
+                  color: '#D1D5DB'
+                }}
+                onMouseEnter={(e) => {
+                  if (selectedTab !== 'analyses') {
+                    e.currentTarget.style.backgroundColor = 'rgba(63, 63, 70, 0.5)'
+                    e.currentTarget.style.color = 'white'
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (selectedTab !== 'analyses') {
+                    e.currentTarget.style.backgroundColor = 'transparent'
+                    e.currentTarget.style.color = '#D1D5DB'
+                  }
+                }}
               >
                 <DocumentTextIcon className="w-5 h-5" />
                 Menu Analyses
               </button>
               <button
                 onClick={() => {setSelectedTab('preferences'); setShowMenu(false)}}
-                className={`w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left transition-colors ${
-                  selectedTab === 'preferences' 
-                    ? 'bg-primary-500/20 text-primary-400' 
-                    : 'text-gray-300 hover:bg-dark-200 hover:text-white'
-                }`}
+                className={`w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left transition-colors font-medium`}
+                style={selectedTab === 'preferences' ? {
+                  background: 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)',
+                  boxShadow: 'inset 0 1px 1px rgba(255, 255, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.1)',
+                  color: '#0A0B0D'
+                } : {
+                  color: '#D1D5DB'
+                }}
+                onMouseEnter={(e) => {
+                  if (selectedTab !== 'preferences') {
+                    e.currentTarget.style.backgroundColor = 'rgba(63, 63, 70, 0.5)'
+                    e.currentTarget.style.color = 'white'
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (selectedTab !== 'preferences') {
+                    e.currentTarget.style.backgroundColor = 'transparent'
+                    e.currentTarget.style.color = '#D1D5DB'
+                  }
+                }}
               >
                 <HeartIcon className="w-5 h-5" />
                 Preferences
               </button>
             </nav>
-          </div>
         </div>
-      )}
+      </div>
 
       {/* Desktop Layout */}
       <div className="hidden lg:flex min-h-screen">
         {/* Desktop Sidebar */}
-        <div className="w-64 bg-dark-100/70 backdrop-blur-md border-r border-white/10" style={{ boxShadow: '0 0 40px rgba(0, 0, 0, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.05)' }}>
+        <div className="w-64 bg-dark-100/70 backdrop-blur-md border-r border-white/10 sticky overflow-y-auto" style={{ top: '3.5rem', height: 'calc(100vh - 3.5rem)', boxShadow: '0 0 40px rgba(0, 0, 0, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.05)' }}>
           <div className="p-6">
             <nav className="space-y-2">
               <button
                 onClick={() => setSelectedTab('overview')}
                 className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-left transition-colors ${
                   selectedTab === 'overview' 
-                    ? 'bg-primary-500/20 text-primary-400' 
+                    ? 'text-gray-900' 
                     : 'text-gray-300 hover:bg-dark-200 hover:text-white'
                 }`}
+                style={selectedTab === 'overview' ? {
+                  background: 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)',
+                  boxShadow: 'inset 0 1px 1px rgba(255, 255, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.1)'
+                } : {}}
+                data-gradient-bg={selectedTab === 'overview' ? "true" : undefined}
               >
                 <ChartBarIcon className="w-5 h-5" />
                 Overview
@@ -174,9 +235,14 @@ export default function Dashboard() {
                 onClick={() => setSelectedTab('analyses')}
                 className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-left transition-colors ${
                   selectedTab === 'analyses' 
-                    ? 'bg-primary-500/20 text-primary-400' 
+                    ? 'text-gray-900' 
                     : 'text-gray-300 hover:bg-dark-200 hover:text-white'
                 }`}
+                style={selectedTab === 'analyses' ? {
+                  background: 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)',
+                  boxShadow: 'inset 0 1px 1px rgba(255, 255, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.1)'
+                } : {}}
+                data-gradient-bg={selectedTab === 'analyses' ? "true" : undefined}
               >
                 <DocumentTextIcon className="w-5 h-5" />
                 Menu Analyses
@@ -185,9 +251,14 @@ export default function Dashboard() {
                 onClick={() => setSelectedTab('preferences')}
                 className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-left transition-colors ${
                   selectedTab === 'preferences' 
-                    ? 'bg-primary-500/20 text-primary-400' 
+                    ? 'text-gray-900' 
                     : 'text-gray-300 hover:bg-dark-200 hover:text-white'
                 }`}
+                style={selectedTab === 'preferences' ? {
+                  background: 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)',
+                  boxShadow: 'inset 0 1px 1px rgba(255, 255, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.1)'
+                } : {}}
+                data-gradient-bg={selectedTab === 'preferences' ? "true" : undefined}
               >
                 <HeartIcon className="w-5 h-5" />
                 Preferences
@@ -202,15 +273,17 @@ export default function Dashboard() {
           {selectedTab === 'overview' && (
             <div className="space-y-6">
               {/* Mobile-First Quick Actions */}
-              <div className="text-center py-12">
-                <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">Ready to order?</h2>
+              <div className="text-center pt-12">
+                <h2 className="text-4xl lg:text-5xl text-white mb-6" style={{ fontWeight: 900 }}>Ready to order?</h2>
                 <p className="text-gray-400 text-base lg:text-lg mb-10">Get instant menu recommendations</p>
                 
                 {/* Action Buttons */}
                 <div className="grid grid-cols-1 gap-3">
                   <button 
-                    className="font-semibold p-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 transform hover:scale-105"
+                    className="p-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 transform hover:scale-105"
+                    suppressHydrationWarning={true}
                     style={{
+                      fontWeight: 700,
                       background: 'linear-gradient(135deg, #6B7280 0%, #4B5563 100%)',
                       boxShadow: 'inset 0 1px 2px rgba(255, 255, 255, 0.1), inset 0 -1px 2px rgba(0, 0, 0, 0.2)',
                       color: '#F3F4F6'
@@ -225,12 +298,15 @@ export default function Dashboard() {
                     }}
                   >
                     <CameraIcon className="w-6 h-6" />
-                    Photo Menu
+                    Menu Camera
                   </button>
                   <div className="grid grid-cols-2 gap-3">
                     <button 
-                      className="font-semibold p-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 transform hover:scale-105"
+                      className="p-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 transform hover:scale-105"
+                      data-gradient-bg="true"
+                      suppressHydrationWarning={true}
                       style={{
+                        fontWeight: 700,
                         background: 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)',
                         boxShadow: 'inset 0 1px 2px rgba(255, 255, 255, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1)',
                         color: '#0A0B0D'
@@ -244,12 +320,15 @@ export default function Dashboard() {
                         e.currentTarget.style.boxShadow = 'inset 0 1px 2px rgba(255, 255, 255, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1)'
                       }}
                     >
-                      <PhotoIcon className="w-6 h-6" />
-                      Upload File
+                      <MagnifyingGlassIcon className="w-6 h-6" />
+                      Search for Restaurant
                     </button>
                     <button 
-                      className="font-semibold p-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 transform hover:scale-105"
+                      className="p-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 transform hover:scale-105"
+                      data-gradient-bg="true"
+                      suppressHydrationWarning={true}
                       style={{
+                        fontWeight: 700,
                         background: 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)',
                         boxShadow: 'inset 0 1px 2px rgba(255, 255, 255, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1)',
                         color: '#0A0B0D'
@@ -264,7 +343,41 @@ export default function Dashboard() {
                       }}
                     >
                       <LinkIcon className="w-6 h-6" />
-                      Menu Link
+                      Paste Menu Link
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Chatbot Component */}
+              <div className="py-8">
+                <div className="bg-dark-100/60 backdrop-blur-md rounded-3xl p-6 border border-white/10" style={{ boxShadow: '0 25px 50px rgba(0, 0, 0, 0.4), 0 8px 20px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.02)' }}>
+                  <div className="text-center mb-6">
+                    <h3 className="text-2xl font-bold text-white mb-2">Ask Palate AI</h3>
+                    <p className="text-gray-400 text-sm">Get instant answers about menus, dietary restrictions, and recommendations</p>
+                  </div>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      placeholder="Ask me anything about food, menus, or restaurants..."
+                      className="w-full p-4 pr-12 bg-dark-200/50 border border-white/20 rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:border-primary-400/50 focus:bg-dark-200/70 transition-all duration-300 text-ellipsis overflow-hidden"
+                      suppressHydrationWarning={true}
+                      style={{
+                        fontSize: '16px',
+                        minHeight: '56px'
+                      }}
+                    />
+                    <button 
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 p-2 rounded-xl transition-all duration-300 hover:scale-105"
+                      data-gradient-bg="true"
+                      style={{
+                        background: 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)',
+                        boxShadow: 'inset 0 1px 2px rgba(255, 255, 255, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1)'
+                      }}
+                    >
+                      <svg className="w-5 h-5 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                      </svg>
                     </button>
                   </div>
                 </div>
@@ -274,8 +387,8 @@ export default function Dashboard() {
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                 <div className="bg-dark-100/60 backdrop-blur-md rounded-2xl p-4 border border-white/10" style={{ boxShadow: '0 25px 50px rgba(0, 0, 0, 0.4), 0 8px 20px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.08)' }}>
                   <div className="text-center">
-                    <div className="w-10 h-10 bg-primary-500/20 rounded-xl flex items-center justify-center mx-auto mb-2">
-                      <DocumentTextIcon className="w-5 h-5 text-primary-400" />
+                    <div className="w-10 h-10 bg-blue-500/20 rounded-xl flex items-center justify-center mx-auto mb-2">
+                      <DocumentTextIcon className="w-5 h-5 text-blue-400" />
                     </div>
                     <p className="text-2xl font-bold text-white">{stats.totalAnalyses}</p>
                     <p className="text-xs text-gray-400">Analyses</p>
@@ -304,17 +417,17 @@ export default function Dashboard() {
 
                 <div className="bg-dark-100/60 backdrop-blur-md rounded-2xl p-4 border border-white/10" style={{ boxShadow: '0 25px 50px rgba(0, 0, 0, 0.4), 0 8px 20px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.08)' }}>
                   <div className="text-center">
-                    <div className="w-10 h-10 bg-yellow-500/20 rounded-xl flex items-center justify-center mx-auto mb-2">
-                      <ChartBarIcon className="w-5 h-5 text-yellow-400" />
+                    <div className="w-10 h-10 bg-orange-500/20 rounded-xl flex items-center justify-center mx-auto mb-2">
+                      <SparklesIcon className="w-5 h-5 text-orange-400" />
                     </div>
-                    <p className="text-2xl font-bold text-white">{stats.avgMatchScore}</p>
-                    <p className="text-xs text-gray-400">Avg Score</p>
+                    <p className="text-lg font-bold text-white truncate">{stats.topDish}</p>
+                    <p className="text-xs text-gray-400">Top Dish</p>
                   </div>
                 </div>
               </div>
 
               {/* Recent Analyses - Mobile Optimized */}
-              <div className="bg-dark-100/60 backdrop-blur-md rounded-2xl border border-white/10" style={{ boxShadow: '0 30px 60px rgba(0, 0, 0, 0.4), 0 12px 25px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.02)' }}>
+              <div className="bg-dark-100/60 backdrop-blur-md rounded-2xl border border-white/10 mt-12" style={{ boxShadow: '0 30px 60px rgba(0, 0, 0, 0.4), 0 12px 25px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.02)' }}>
                 <div className="p-4 border-b border-white/10">
                   <h3 className="text-lg font-semibold text-white">Recent Analyses</h3>
                 </div>
@@ -323,10 +436,25 @@ export default function Dashboard() {
                     {recentAnalyses.map((analysis) => (
                       <div key={analysis.id} className="p-4 border border-dark-300 bg-dark-100 rounded-xl hover:border-primary-400 transition-colors">
                         <div className="flex items-start justify-between mb-2">
-                          <h4 className="font-semibold text-white">{analysis.restaurant}</h4>
+                          <h4 className="font-bold text-white text-lg">{analysis.restaurant}</h4>
                           <button 
                             onClick={() => router.push(`/restaurant/${analysis.id}`)}
-                            className="text-primary-400 hover:text-primary-300 text-sm font-medium"
+                            className="text-sm font-semibold px-3 py-1.5 rounded-lg transition-all duration-300 transform hover:scale-105"
+                            data-gradient-bg="true"
+                            suppressHydrationWarning={true}
+                            style={{
+                              background: 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)',
+                              boxShadow: 'inset 0 1px 1px rgba(255, 255, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.1)',
+                              color: '#0A0B0D'
+                            }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.background = 'linear-gradient(135deg, #22FFD3 0%, #00FFB8 100%)'
+                              e.currentTarget.style.boxShadow = 'inset 0 1px 1px rgba(255, 255, 255, 0.3), inset 0 -1px 1px rgba(0, 0, 0, 0.15)'
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.background = 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)'
+                              e.currentTarget.style.boxShadow = 'inset 0 1px 1px rgba(255, 255, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.1)'
+                            }}
                           >
                             View
                           </button>
@@ -398,14 +526,20 @@ export default function Dashboard() {
           {selectedTab === 'overview' && (
             <div className="space-y-6">
               {/* Mobile-First Quick Actions */}
-              <div className="text-center py-12">
-                <h2 className="text-3xl font-bold text-white mb-6">Ready to order?</h2>
+              <div className="text-center pt-12">
+                <h2 className="text-4xl text-white mb-6" style={{ fontWeight: 900 }}>Ready to order?</h2>
                 <p className="text-gray-400 text-base mb-10">Get instant menu recommendations</p>
                 
                 {/* Action Buttons */}
                 <div className="grid grid-cols-1 gap-3">
                   <button 
-                    className="font-semibold p-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 transform hover:scale-105"
+                    className="p-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 transform hover:scale-105"
+                    style={{
+                      fontWeight: 700,
+                      background: 'linear-gradient(135deg, #6B7280 0%, #4B5563 100%)',
+                      boxShadow: 'inset 0 1px 2px rgba(255, 255, 255, 0.1), inset 0 -1px 2px rgba(0, 0, 0, 0.2)',
+                      color: '#F3F4F6'
+                    }}
                     style={{
                       background: 'linear-gradient(135deg, #6B7280 0%, #4B5563 100%)',
                       boxShadow: 'inset 0 1px 2px rgba(255, 255, 255, 0.1), inset 0 -1px 2px rgba(0, 0, 0, 0.2)',
@@ -421,12 +555,15 @@ export default function Dashboard() {
                     }}
                   >
                     <CameraIcon className="w-6 h-6" />
-                    Photo Menu
+                    Menu Camera
                   </button>
                   <div className="grid grid-cols-2 gap-3">
                     <button 
-                      className="font-semibold p-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 transform hover:scale-105"
+                      className="p-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 transform hover:scale-105"
+                      data-gradient-bg="true"
+                      suppressHydrationWarning={true}
                       style={{
+                        fontWeight: 700,
                         background: 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)',
                         boxShadow: 'inset 0 1px 2px rgba(255, 255, 255, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1)',
                         color: '#0A0B0D'
@@ -440,12 +577,15 @@ export default function Dashboard() {
                         e.currentTarget.style.boxShadow = 'inset 0 1px 2px rgba(255, 255, 255, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1)'
                       }}
                     >
-                      <PhotoIcon className="w-6 h-6" />
-                      Upload File
+                      <MagnifyingGlassIcon className="w-6 h-6" />
+                      Search for Restaurant
                     </button>
                     <button 
-                      className="font-semibold p-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 transform hover:scale-105"
+                      className="p-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 transform hover:scale-105"
+                      data-gradient-bg="true"
+                      suppressHydrationWarning={true}
                       style={{
+                        fontWeight: 700,
                         background: 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)',
                         boxShadow: 'inset 0 1px 2px rgba(255, 255, 255, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1)',
                         color: '#0A0B0D'
@@ -460,7 +600,42 @@ export default function Dashboard() {
                       }}
                     >
                       <LinkIcon className="w-6 h-6" />
-                      Menu Link
+                      Paste Menu Link
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Chatbot Component */}
+              <div className="py-8">
+                <div className="bg-dark-100/60 backdrop-blur-md rounded-3xl p-6 border border-white/10" style={{ boxShadow: '0 25px 50px rgba(0, 0, 0, 0.4), 0 8px 20px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.02)' }}>
+                  <div className="text-center mb-6">
+                    <h3 className="text-2xl font-bold text-white mb-2">Ask Palate AI</h3>
+                    <p className="text-gray-400 text-sm">Get instant answers about menus, dietary restrictions, and recommendations</p>
+                  </div>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      placeholder="Ask me anything about food, menus, or restaurants..."
+                      className="w-full p-4 pr-12 bg-dark-200/50 border border-white/20 rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:border-primary-400/50 focus:bg-dark-200/70 transition-all duration-300 text-ellipsis overflow-hidden"
+                      suppressHydrationWarning={true}
+                      style={{
+                        fontSize: '16px',
+                        minHeight: '56px'
+                      }}
+                    />
+                    <button 
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 p-2 rounded-xl transition-all duration-300 hover:scale-105"
+                      data-gradient-bg="true"
+                      suppressHydrationWarning={true}
+                      style={{
+                        background: 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)',
+                        boxShadow: 'inset 0 1px 2px rgba(255, 255, 255, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1)'
+                      }}
+                    >
+                      <svg className="w-5 h-5 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                      </svg>
                     </button>
                   </div>
                 </div>
@@ -470,8 +645,8 @@ export default function Dashboard() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-dark-100/60 backdrop-blur-md rounded-2xl p-4 border border-white/10" style={{ boxShadow: '0 25px 50px rgba(0, 0, 0, 0.4), 0 8px 20px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.08)' }}>
                   <div className="text-center">
-                    <div className="w-10 h-10 bg-primary-500/20 rounded-xl flex items-center justify-center mx-auto mb-2">
-                      <DocumentTextIcon className="w-5 h-5 text-primary-400" />
+                    <div className="w-10 h-10 bg-blue-500/20 rounded-xl flex items-center justify-center mx-auto mb-2">
+                      <DocumentTextIcon className="w-5 h-5 text-blue-400" />
                     </div>
                     <p className="text-2xl font-bold text-white">{stats.totalAnalyses}</p>
                     <p className="text-xs text-gray-400">Analyses</p>
@@ -500,17 +675,17 @@ export default function Dashboard() {
 
                 <div className="bg-dark-100/60 backdrop-blur-md rounded-2xl p-4 border border-white/10" style={{ boxShadow: '0 25px 50px rgba(0, 0, 0, 0.4), 0 8px 20px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.08)' }}>
                   <div className="text-center">
-                    <div className="w-10 h-10 bg-yellow-500/20 rounded-xl flex items-center justify-center mx-auto mb-2">
-                      <ChartBarIcon className="w-5 h-5 text-yellow-400" />
+                    <div className="w-10 h-10 bg-orange-500/20 rounded-xl flex items-center justify-center mx-auto mb-2">
+                      <SparklesIcon className="w-5 h-5 text-orange-400" />
                     </div>
-                    <p className="text-2xl font-bold text-white">{stats.avgMatchScore}</p>
-                    <p className="text-xs text-gray-400">Avg Score</p>
+                    <p className="text-lg font-bold text-white truncate">{stats.topDish}</p>
+                    <p className="text-xs text-gray-400">Top Dish</p>
                   </div>
                 </div>
               </div>
 
               {/* Recent Analyses - Mobile Optimized */}
-              <div className="bg-dark-100/60 backdrop-blur-md rounded-2xl border border-white/10" style={{ boxShadow: '0 30px 60px rgba(0, 0, 0, 0.4), 0 12px 25px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.02)' }}>
+              <div className="bg-dark-100/60 backdrop-blur-md rounded-2xl border border-white/10 mt-12" style={{ boxShadow: '0 30px 60px rgba(0, 0, 0, 0.4), 0 12px 25px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.02)' }}>
                 <div className="p-4 border-b border-white/10">
                   <h3 className="text-lg font-semibold text-white">Recent Analyses</h3>
                 </div>
@@ -519,10 +694,25 @@ export default function Dashboard() {
                     {recentAnalyses.map((analysis) => (
                       <div key={analysis.id} className="p-4 border border-dark-300 bg-dark-100 rounded-xl hover:border-primary-400 transition-colors">
                         <div className="flex items-start justify-between mb-2">
-                          <h4 className="font-semibold text-white">{analysis.restaurant}</h4>
+                          <h4 className="font-bold text-white text-lg">{analysis.restaurant}</h4>
                           <button 
                             onClick={() => router.push(`/restaurant/${analysis.id}`)}
-                            className="text-primary-400 hover:text-primary-300 text-sm font-medium"
+                            className="text-sm font-semibold px-3 py-1.5 rounded-lg transition-all duration-300 transform hover:scale-105"
+                            data-gradient-bg="true"
+                            suppressHydrationWarning={true}
+                            style={{
+                              background: 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)',
+                              boxShadow: 'inset 0 1px 1px rgba(255, 255, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.1)',
+                              color: '#0A0B0D'
+                            }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.background = 'linear-gradient(135deg, #22FFD3 0%, #00FFB8 100%)'
+                              e.currentTarget.style.boxShadow = 'inset 0 1px 1px rgba(255, 255, 255, 0.3), inset 0 -1px 1px rgba(0, 0, 0, 0.15)'
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.background = 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)'
+                              e.currentTarget.style.boxShadow = 'inset 0 1px 1px rgba(255, 255, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.1)'
+                            }}
                           >
                             View
                           </button>

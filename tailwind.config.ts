@@ -8,6 +8,11 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'cal-sans': ['Cal Sans', 'sans-serif'],
+        'recursive': ['Recursive', 'sans-serif'],
+        'sans': ['Recursive', 'sans-serif'],
+      },
       colors: {
         // Dark theme with neon teal accents
         primary: {

@@ -203,6 +203,7 @@ export default function RestaurantDetail({ params }: { params: Promise<{ id: str
         )}
         <button 
           className="w-full font-bold py-3 px-4 rounded-2xl transition-all duration-300 transform hover:scale-105"
+          data-gradient-bg="true"
           style={{
             background: 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)',
             boxShadow: 'inset 0 1px 2px rgba(255, 255, 255, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1)',
@@ -281,8 +282,8 @@ export default function RestaurantDetail({ params }: { params: Promise<{ id: str
           
           <div className="grid grid-cols-1 gap-3 text-sm">
             <div className="flex items-center gap-3 text-gray-300">
-              <div className="w-8 h-8 bg-primary-500/20 rounded-lg flex items-center justify-center">
-                <MapPinIcon className="w-4 h-4 text-primary-400" />
+              <div className="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                <MapPinIcon className="w-4 h-4 text-blue-400" />
               </div>
               <span>{restaurant.address}</span>
             </div>
@@ -314,6 +315,7 @@ export default function RestaurantDetail({ params }: { params: Promise<{ id: str
               background: 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)',
               boxShadow: 'inset 0 1px 1px rgba(255, 255, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.1)'
             } : {}}
+            data-gradient-bg={activeTab === 'past-orders' ? "true" : undefined}
           >
             Past Orders
           </button>
@@ -328,6 +330,7 @@ export default function RestaurantDetail({ params }: { params: Promise<{ id: str
               background: 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)',
               boxShadow: 'inset 0 1px 1px rgba(255, 255, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.1)'
             } : {}}
+            data-gradient-bg={activeTab === 'suggested' ? "true" : undefined}
           >
             Suggested
           </button>

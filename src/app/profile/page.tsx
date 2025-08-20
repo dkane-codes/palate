@@ -20,7 +20,7 @@ export default function Profile() {
   const router = useRouter()
   const [scrollY, setScrollY] = useState(0)
   const [isEditing, setIsEditing] = useState(false)
-  const [userInfo, setUserInfo] = useState({
+  const [userInfo] = useState({
     name: 'Alex Johnson',
     email: 'alex.johnson@email.com',
     phone: '+1 (555) 123-4567',

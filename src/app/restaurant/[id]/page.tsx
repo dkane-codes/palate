@@ -4,8 +4,6 @@ import { useState, use, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { 
   ArrowLeftIcon,
-  StarIcon,
-  HeartIcon,
   MapPinIcon,
   ClockIcon,
   PhoneIcon

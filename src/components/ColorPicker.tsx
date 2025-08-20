@@ -47,7 +47,6 @@ export default function ColorPicker() {
   const [selectedColor, setSelectedColor] = useState('Teal')
   const [isOpen, setIsOpen] = useState(false)
   const [isDarkMode, setIsDarkMode] = useState(true)
-  const [isClient, setIsClient] = useState(false)
 
   const updateColors = (color: ColorOption) => {
     // Prevent hydration mismatch by only running on client

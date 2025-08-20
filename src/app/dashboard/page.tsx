@@ -8,14 +8,11 @@ import {
   LinkIcon,
   ClockIcon,
   StarIcon,
-  Cog6ToothIcon,
   DocumentTextIcon,
   HeartIcon,
   ExclamationTriangleIcon,
   ChartBarIcon,
   Bars3Icon,
-  PlusIcon,
-  CheckIcon,
   SparklesIcon
 } from '@heroicons/react/24/outline'
 import { UserIcon } from '@heroicons/react/24/solid'
@@ -26,8 +23,6 @@ export default function Dashboard() {
   const [selectedTab, setSelectedTab] = useState('overview')
   const [showMenu, setShowMenu] = useState(false)
   const [scrollY, setScrollY] = useState(0)
-  const [showLinkInput, setShowLinkInput] = useState(false)
-  const [menuLink, setMenuLink] = useState('')
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY)
@@ -536,11 +531,6 @@ export default function Dashboard() {
                     className="p-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 transform hover:scale-105"
                     style={{
                       fontWeight: 700,
-                      background: 'linear-gradient(135deg, #6B7280 0%, #4B5563 100%)',
-                      boxShadow: 'inset 0 1px 2px rgba(255, 255, 255, 0.1), inset 0 -1px 2px rgba(0, 0, 0, 0.2)',
-                      color: '#F3F4F6'
-                    }}
-                    style={{
                       background: 'linear-gradient(135deg, #6B7280 0%, #4B5563 100%)',
                       boxShadow: 'inset 0 1px 2px rgba(255, 255, 255, 0.1), inset 0 -1px 2px rgba(0, 0, 0, 0.2)',
                       color: '#F3F4F6'

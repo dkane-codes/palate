@@ -9,18 +9,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Custom vibrant color palette - adapted for palate project
+        // Dark theme with neon teal accents
         primary: {
-          50: '#FFF5F5',
-          100: '#FFE3E3',
-          200: '#FFC9C9',
-          300: '#FFA8A8',
-          400: '#FF8787',
-          500: '#FF6B6B', // Main primary
-          600: '#FA5252',
-          700: '#E03131',
-          800: '#C92A2A',
-          900: '#862E2E',
+          50: '#ECFFFE',
+          100: '#CFFFF8',
+          200: '#A5FFF0',
+          300: '#67FFE8',
+          400: '#22FFD3',
+          500: '#00FFB8', // Neon green-teal
+          600: '#00D19A',
+          700: '#00A37D',
+          800: '#008B6B',
+          900: '#007359',
         },
         secondary: {
           50: '#F0FDFA',
@@ -106,15 +106,34 @@ export default {
           800: '#92400E',
           900: '#78350F',
         },
+        // Dark theme colors
+        dark: {
+          50: '#18181B',
+          100: '#27272A',
+          200: '#3F3F46',
+          300: '#52525B',
+          400: '#71717A',
+          500: '#1A1A1D', // Main dark background
+          600: '#16161A',
+          700: '#0D0D0F',
+          800: '#000000',
+          900: '#000000',
+        },
       },
       backgroundImage: {
-        'gradient-primary': 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%)',
-        'gradient-secondary': 'linear-gradient(135deg, #45B7D1 0%, #6C5CE7 100%)',
-        'gradient-warm': 'linear-gradient(135deg, #FFE66D 0%, #FF8E53 100%)',
-        'gradient-cool': 'linear-gradient(135deg, #A8E6CF 0%, #45B7D1 100%)',
-        'gradient-mixed': 'linear-gradient(135deg, #FF6B6B 0%, #45B7D1 50%, #6C5CE7 100%)',
+        'gradient-primary': 'linear-gradient(135deg, #1A1A1D 0%, #27272A 100%)',
+        'gradient-dark': 'linear-gradient(135deg, #0D0D0F 0%, #1A1A1D 50%, #27272A 100%)',
+        'gradient-light': 'linear-gradient(135deg, #2A2D3A 0%, #212734 50%, #1E2028 100%)',
+        'gradient-neon': 'linear-gradient(135deg, #00E5FF 0%, #22D3EE 100%)',
+        'gradient-mixed': 'linear-gradient(135deg, #0D0D0F 0%, #1A1A1D 50%, #27272A 100%)',
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'pattern-dots': 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0)',
+        'pattern-geometric': 'radial-gradient(circle at 1px 1px, rgba(0, 229, 255, 0.15) 1px, transparent 0), linear-gradient(45deg, rgba(255, 255, 255, 0.03) 25%, transparent 25%)',
+      },
+      backgroundSize: {
+        'pattern-dots': '20px 20px',
+        'pattern-geometric': '20px 20px, 40px 40px',
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',
@@ -139,6 +158,12 @@ export default {
         'vibrant': '0 10px 25px -3px rgba(255, 107, 107, 0.3), 0 4px 6px -2px rgba(255, 107, 107, 0.1)',
         'cool': '0 10px 25px -3px rgba(69, 183, 209, 0.3), 0 4px 6px -2px rgba(69, 183, 209, 0.1)',
         'warm': '0 10px 25px -3px rgba(255, 230, 109, 0.3), 0 4px 6px -2px rgba(255, 230, 109, 0.1)',
+        'card': '0 20px 40px -12px rgba(0, 0, 0, 0.25), 0 8px 20px -6px rgba(0, 0, 0, 0.1)',
+        'card-hover': '0 25px 50px -12px rgba(0, 0, 0, 0.35), 0 12px 30px -6px rgba(0, 0, 0, 0.15)',
+        'button': '0 12px 24px -8px rgba(0, 229, 255, 0.4), 0 4px 12px -2px rgba(0, 229, 255, 0.2)',
+        'button-hover': '0 16px 32px -8px rgba(0, 229, 255, 0.5), 0 6px 16px -2px rgba(0, 229, 255, 0.3)',
+        'inset': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.1)',
+        'bevel': '0 1px 3px rgba(255, 255, 255, 0.1), inset 0 1px 1px rgba(255, 255, 255, 0.05), inset 0 -1px 1px rgba(0, 0, 0, 0.1)',
       },
     },
   },

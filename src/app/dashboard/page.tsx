@@ -17,6 +17,7 @@ import {
 } from '@heroicons/react/24/outline'
 import { UserIcon } from '@heroicons/react/24/solid'
 import PalateLogo from '@/components/PalateLogo'
+import ThemeInitializer from '@/components/ThemeInitializer'
 
 export default function Dashboard() {
   const router = useRouter()
@@ -66,24 +67,26 @@ export default function Dashboard() {
   }
 
   return (
-    <div 
-      className="min-h-screen text-white" 
-      style={{ 
-        background: `
-          linear-gradient(45deg, rgba(255, 255, 255, 0.03) 25%, transparent 25%),
-          linear-gradient(-45deg, rgba(255, 255, 255, 0.03) 25%, transparent 25%),
-          radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.15) 1px, transparent 0),
-          linear-gradient(135deg, #3A3D4A 0%, #2A2E3B 25%, #343847 50%, #2D3240 75%, #262B38 100%)
-        `,
-        backgroundSize: '80px 80px, 80px 80px, 20px 20px, 100% 100%',
-        backgroundPosition: `
-          ${scrollY * 0.1}px ${scrollY * 0.05}px,
-          ${-scrollY * 0.1}px ${scrollY * 0.1}px,
-          ${scrollY * 0.2}px ${scrollY * 0.15}px,
-          0 0
-        `
-      }}
-    >
+    <>
+      <ThemeInitializer />
+      <div 
+        className="min-h-screen text-white" 
+        style={{ 
+          background: `
+            linear-gradient(45deg, rgba(255, 255, 255, 0.03) 25%, transparent 25%),
+            linear-gradient(-45deg, rgba(255, 255, 255, 0.03) 25%, transparent 25%),
+            radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.15) 1px, transparent 0),
+            linear-gradient(135deg, #3A3D4A 0%, #2A2E3B 25%, #343847 50%, #2D3240 75%, #262B38 100%)
+          `,
+          backgroundSize: '80px 80px, 80px 80px, 20px 20px, 100% 100%',
+          backgroundPosition: `
+            ${scrollY * 0.1}px ${scrollY * 0.05}px,
+            ${-scrollY * 0.1}px ${scrollY * 0.1}px,
+            ${scrollY * 0.2}px ${scrollY * 0.15}px,
+            0 0
+          `
+        }}
+      >
       {/* Mobile Header */}
       <nav className="bg-dark-100/60 backdrop-blur-xl border-b border-white/10 px-4 py-2 sticky top-0 z-10" style={{ boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05)' }}>
         <div className="flex items-center justify-between">
@@ -130,7 +133,7 @@ export default function Dashboard() {
                   boxShadow: 'inset 0 1px 1px rgba(255, 255, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.1)',
                   color: '#0A0B0D'
                 } : {
-                  color: '#D1D5DB'
+                  color: '#6B7280'
                 }}
                 onMouseEnter={(e) => {
                   if (selectedTab !== 'overview') {
@@ -141,7 +144,7 @@ export default function Dashboard() {
                 onMouseLeave={(e) => {
                   if (selectedTab !== 'overview') {
                     e.currentTarget.style.backgroundColor = 'transparent'
-                    e.currentTarget.style.color = '#D1D5DB'
+                    e.currentTarget.style.color = '#6B7280'
                   }
                 }}
               >
@@ -156,7 +159,7 @@ export default function Dashboard() {
                   boxShadow: 'inset 0 1px 1px rgba(255, 255, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.1)',
                   color: '#0A0B0D'
                 } : {
-                  color: '#D1D5DB'
+                  color: '#6B7280'
                 }}
                 onMouseEnter={(e) => {
                   if (selectedTab !== 'analyses') {
@@ -167,7 +170,7 @@ export default function Dashboard() {
                 onMouseLeave={(e) => {
                   if (selectedTab !== 'analyses') {
                     e.currentTarget.style.backgroundColor = 'transparent'
-                    e.currentTarget.style.color = '#D1D5DB'
+                    e.currentTarget.style.color = '#6B7280'
                   }
                 }}
               >
@@ -182,7 +185,7 @@ export default function Dashboard() {
                   boxShadow: 'inset 0 1px 1px rgba(255, 255, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.1)',
                   color: '#0A0B0D'
                 } : {
-                  color: '#D1D5DB'
+                  color: '#6B7280'
                 }}
                 onMouseEnter={(e) => {
                   if (selectedTab !== 'preferences') {
@@ -193,7 +196,7 @@ export default function Dashboard() {
                 onMouseLeave={(e) => {
                   if (selectedTab !== 'preferences') {
                     e.currentTarget.style.backgroundColor = 'transparent'
-                    e.currentTarget.style.color = '#D1D5DB'
+                    e.currentTarget.style.color = '#6B7280'
                   }
                 }}
               >
@@ -215,7 +218,7 @@ export default function Dashboard() {
                 className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-left transition-colors ${
                   selectedTab === 'overview' 
                     ? 'text-gray-900' 
-                    : 'text-gray-300 hover:bg-dark-200 hover:text-white'
+                    : 'text-gray-600 hover:bg-dark-200 hover:text-white'
                 }`}
                 style={selectedTab === 'overview' ? {
                   background: 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)',
@@ -231,7 +234,7 @@ export default function Dashboard() {
                 className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-left transition-colors ${
                   selectedTab === 'analyses' 
                     ? 'text-gray-900' 
-                    : 'text-gray-300 hover:bg-dark-200 hover:text-white'
+                    : 'text-gray-600 hover:bg-dark-200 hover:text-white'
                 }`}
                 style={selectedTab === 'analyses' ? {
                   background: 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)',
@@ -247,7 +250,7 @@ export default function Dashboard() {
                 className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-left transition-colors ${
                   selectedTab === 'preferences' 
                     ? 'text-gray-900' 
-                    : 'text-gray-300 hover:bg-dark-200 hover:text-white'
+                    : 'text-gray-600 hover:bg-dark-200 hover:text-white'
                 }`}
                 style={selectedTab === 'preferences' ? {
                   background: 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)',
@@ -767,5 +770,6 @@ export default function Dashboard() {
         </div>
       </div>
     </div>
+    </>
   )
 }

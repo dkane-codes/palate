@@ -15,6 +15,7 @@ import {
   PencilIcon
 } from '@heroicons/react/24/outline'
 import PalateLogo from '@/components/PalateLogo'
+import ThemeInitializer from '@/components/ThemeInitializer'
 
 export default function Profile() {
   const router = useRouter()
@@ -52,18 +53,20 @@ export default function Profile() {
   const allergies = ['Shellfish', 'Peanuts']
 
   return (
-    <div 
-      className="min-h-screen text-white" 
-      style={{ 
-        background: `
-          linear-gradient(45deg, rgba(255, 255, 255, 0.03) 25%, transparent 25%),
-          linear-gradient(-45deg, rgba(255, 255, 255, 0.03) 25%, transparent 25%),
-          radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.15) 1px, transparent 0),
-          linear-gradient(135deg, #3A3D4A 0%, #2A2E3B 25%, #343847 50%, #2D3240 75%, #262B38 100%)
-        `,
-        backgroundSize: '80px 80px, 80px 80px, 20px 20px, 100% 100%',
-        backgroundPosition: `
-          ${scrollY * 0.1}px ${scrollY * 0.05}px,
+    <>
+      <ThemeInitializer />
+      <div 
+        className="min-h-screen text-white" 
+        style={{ 
+          background: `
+            linear-gradient(45deg, rgba(255, 255, 255, 0.03) 25%, transparent 25%),
+            linear-gradient(-45deg, rgba(255, 255, 255, 0.03) 25%, transparent 25%),
+            radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.15) 1px, transparent 0),
+            linear-gradient(135deg, #3A3D4A 0%, #2A2E3B 25%, #343847 50%, #2D3240 75%, #262B38 100%)
+          `,
+          backgroundSize: '80px 80px, 80px 80px, 20px 20px, 100% 100%',
+          backgroundPosition: `
+            ${scrollY * 0.1}px ${scrollY * 0.05}px,
           ${-scrollY * 0.1}px ${scrollY * 0.1}px,
           ${scrollY * 0.2}px ${scrollY * 0.15}px,
           0 0
@@ -246,5 +249,6 @@ export default function Profile() {
         </div>
       </div>
     </div>
+    </>
   )
 }

@@ -25,13 +25,19 @@ export default function RestaurantDetail({ params }: { params: Promise<{ id: str
   const router = useRouter()
   const [activeTab, setActiveTab] = useState('past-orders')
   const [scrollY, setScrollY] = useState(0)
+  const [isClient, setIsClient] = useState(false)
   const resolvedParams = use(params)
 
   useEffect(() => {
+    setIsClient(true)
+  }, [])
+
+  useEffect(() => {
+    if (!isClient) return
     const handleScroll = () => setScrollY(window.scrollY)
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [isClient])
 
   // Mock restaurant data based on ID
   const getRestaurantData = (id: string) => {
@@ -236,12 +242,12 @@ export default function RestaurantDetail({ params }: { params: Promise<{ id: str
             linear-gradient(135deg, #3A3D4A 0%, #2A2E3B 25%, #343847 50%, #2D3240 75%, #262B38 100%)
           `,
           backgroundSize: '80px 80px, 80px 80px, 20px 20px, 100% 100%',
-          backgroundPosition: `
+          backgroundPosition: isClient ? `
             ${scrollY * 0.1}px ${scrollY * 0.05}px,
-          ${-scrollY * 0.1}px ${scrollY * 0.1}px,
-          ${scrollY * 0.2}px ${scrollY * 0.15}px,
-          0 0
-        `
+            ${-scrollY * 0.1}px ${scrollY * 0.1}px,
+            ${scrollY * 0.2}px ${scrollY * 0.15}px,
+            0 0
+          ` : '0 0, 0 0, 0 0, 0 0'
       }}
     >
       {/* Header */}

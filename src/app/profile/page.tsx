@@ -21,6 +21,7 @@ export default function Profile() {
   const router = useRouter()
   const [scrollY, setScrollY] = useState(0)
   const [isEditing, setIsEditing] = useState(false)
+  const [isClient, setIsClient] = useState(false)
   const [userInfo] = useState({
     name: 'Alex Johnson',
     email: 'alex.johnson@email.com',
@@ -29,10 +30,15 @@ export default function Profile() {
   })
 
   useEffect(() => {
+    setIsClient(true)
+  }, [])
+
+  useEffect(() => {
+    if (!isClient) return
     const handleScroll = () => setScrollY(window.scrollY)
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [isClient])
 
   const stats = {
     totalAnalyses: 24,
@@ -65,12 +71,12 @@ export default function Profile() {
             linear-gradient(135deg, #3A3D4A 0%, #2A2E3B 25%, #343847 50%, #2D3240 75%, #262B38 100%)
           `,
           backgroundSize: '80px 80px, 80px 80px, 20px 20px, 100% 100%',
-          backgroundPosition: `
+          backgroundPosition: isClient ? `
             ${scrollY * 0.1}px ${scrollY * 0.05}px,
-          ${-scrollY * 0.1}px ${scrollY * 0.1}px,
-          ${scrollY * 0.2}px ${scrollY * 0.15}px,
-          0 0
-        `
+            ${-scrollY * 0.1}px ${scrollY * 0.1}px,
+            ${scrollY * 0.2}px ${scrollY * 0.15}px,
+            0 0
+          ` : '0 0, 0 0, 0 0, 0 0'
       }}
     >
       {/* Header */}

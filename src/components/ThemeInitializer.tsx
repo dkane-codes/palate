@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 const colorOptions = [
   {
@@ -31,6 +31,7 @@ const colorOptions = [
 ]
 
 export default function ThemeInitializer() {
+
   useEffect(() => {
     if (typeof window === 'undefined') return
 
@@ -142,16 +143,16 @@ export default function ThemeInitializer() {
     
     if (savedTheme) {
       const isDark = savedTheme === 'dark'
-      setTimeout(() => applyTheme(isDark), 50)
+      applyTheme(isDark)
     } else {
       // Default to dark mode
-      setTimeout(() => applyTheme(true), 50)
+      applyTheme(true)
     }
 
     if (savedColor) {
       const color = colorOptions.find(c => c.name === savedColor)
       if (color) {
-        setTimeout(() => applyColors(color), 100)
+        applyColors(color)
       }
     }
   }, [])

@@ -24,12 +24,18 @@ export default function Dashboard() {
   const [selectedTab, setSelectedTab] = useState('overview')
   const [showMenu, setShowMenu] = useState(false)
   const [scrollY, setScrollY] = useState(0)
+  const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
+    setIsClient(true)
+  }, [])
+
+  useEffect(() => {
+    if (!isClient) return
     const handleScroll = () => setScrollY(window.scrollY)
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [isClient])
 
   // Mock data for now
   const recentAnalyses = [
@@ -79,12 +85,12 @@ export default function Dashboard() {
             linear-gradient(135deg, #3A3D4A 0%, #2A2E3B 25%, #343847 50%, #2D3240 75%, #262B38 100%)
           `,
           backgroundSize: '80px 80px, 80px 80px, 20px 20px, 100% 100%',
-          backgroundPosition: `
+          backgroundPosition: isClient ? `
             ${scrollY * 0.1}px ${scrollY * 0.05}px,
             ${-scrollY * 0.1}px ${scrollY * 0.1}px,
             ${scrollY * 0.2}px ${scrollY * 0.15}px,
             0 0
-          `
+          ` : '0 0, 0 0, 0 0, 0 0'
         }}
       >
       {/* Mobile Header */}
@@ -127,78 +133,48 @@ export default function Dashboard() {
             <nav className="space-y-2">
               <button
                 onClick={() => {setSelectedTab('overview'); setShowMenu(false)}}
-                className={`w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left transition-colors font-medium`}
+                className={`w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left transition-colors font-medium ${
+                  selectedTab === 'overview' 
+                    ? 'text-gray-900' 
+                    : 'text-gray-600 hover:bg-dark-200/50 hover:text-white'
+                }`}
                 style={selectedTab === 'overview' ? {
                   background: 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)',
-                  boxShadow: 'inset 0 1px 1px rgba(255, 255, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.1)',
-                  color: '#0A0B0D'
-                } : {
-                  color: '#6B7280'
-                }}
-                onMouseEnter={(e) => {
-                  if (selectedTab !== 'overview') {
-                    e.currentTarget.style.backgroundColor = 'rgba(63, 63, 70, 0.5)'
-                    e.currentTarget.style.color = 'white'
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (selectedTab !== 'overview') {
-                    e.currentTarget.style.backgroundColor = 'transparent'
-                    e.currentTarget.style.color = '#6B7280'
-                  }
-                }}
+                  boxShadow: 'inset 0 1px 1px rgba(255, 255, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.1)'
+                } : {}}
+                data-gradient-bg={selectedTab === 'overview' ? "true" : undefined}
               >
                 <ChartBarIcon className="w-5 h-5" />
                 Overview
               </button>
               <button
                 onClick={() => {setSelectedTab('analyses'); setShowMenu(false)}}
-                className={`w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left transition-colors font-medium`}
+                className={`w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left transition-colors font-medium ${
+                  selectedTab === 'analyses' 
+                    ? 'text-gray-900' 
+                    : 'text-gray-600 hover:bg-dark-200/50 hover:text-white'
+                }`}
                 style={selectedTab === 'analyses' ? {
                   background: 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)',
-                  boxShadow: 'inset 0 1px 1px rgba(255, 255, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.1)',
-                  color: '#0A0B0D'
-                } : {
-                  color: '#6B7280'
-                }}
-                onMouseEnter={(e) => {
-                  if (selectedTab !== 'analyses') {
-                    e.currentTarget.style.backgroundColor = 'rgba(63, 63, 70, 0.5)'
-                    e.currentTarget.style.color = 'white'
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (selectedTab !== 'analyses') {
-                    e.currentTarget.style.backgroundColor = 'transparent'
-                    e.currentTarget.style.color = '#6B7280'
-                  }
-                }}
+                  boxShadow: 'inset 0 1px 1px rgba(255, 255, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.1)'
+                } : {}}
+                data-gradient-bg={selectedTab === 'analyses' ? "true" : undefined}
               >
                 <DocumentTextIcon className="w-5 h-5" />
                 Menu Analyses
               </button>
               <button
                 onClick={() => {setSelectedTab('preferences'); setShowMenu(false)}}
-                className={`w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left transition-colors font-medium`}
+                className={`w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left transition-colors font-medium ${
+                  selectedTab === 'preferences' 
+                    ? 'text-gray-900' 
+                    : 'text-gray-600 hover:bg-dark-200/50 hover:text-white'
+                }`}
                 style={selectedTab === 'preferences' ? {
                   background: 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)',
-                  boxShadow: 'inset 0 1px 1px rgba(255, 255, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.1)',
-                  color: '#0A0B0D'
-                } : {
-                  color: '#6B7280'
-                }}
-                onMouseEnter={(e) => {
-                  if (selectedTab !== 'preferences') {
-                    e.currentTarget.style.backgroundColor = 'rgba(63, 63, 70, 0.5)'
-                    e.currentTarget.style.color = 'white'
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (selectedTab !== 'preferences') {
-                    e.currentTarget.style.backgroundColor = 'transparent'
-                    e.currentTarget.style.color = '#6B7280'
-                  }
-                }}
+                  boxShadow: 'inset 0 1px 1px rgba(255, 255, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.1)'
+                } : {}}
+                data-gradient-bg={selectedTab === 'preferences' ? "true" : undefined}
               >
                 <HeartIcon className="w-5 h-5" />
                 Preferences

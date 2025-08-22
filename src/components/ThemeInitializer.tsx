@@ -73,6 +73,10 @@ export default function ThemeInitializer() {
           .border-white\\/10 { border-color: rgba(255, 255, 255, 0.1) !important; }
           .border-white\\/20 { border-color: rgba(255, 255, 255, 0.2) !important; }
           .bg-dark-200\\/50 { background-color: rgba(63, 63, 70, 0.5) !important; }
+          .hero-overlay-box { background: linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgba(20, 20, 20, 0.9) 100%) !important; }
+          .allergen-warning-box { background-color: rgba(245, 158, 11, 0.2) !important; }
+          .allergen-warning-title { color: #FDE047 !important; }
+          .allergen-warning-text { color: #FFFFFF !important; }
         `
       } else {
         // Light mode styles
@@ -100,6 +104,11 @@ export default function ThemeInitializer() {
           .border-white\\/10 { border-color: rgba(0, 0, 0, 0.1) !important; }
           .border-white\\/20 { border-color: rgba(0, 0, 0, 0.2) !important; }
           .bg-dark-200\\/50 { background-color: rgba(241, 245, 249, 0.7) !important; }
+          .hero-overlay-box { background: linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(248, 250, 252, 0.8) 100%) !important; }
+          .text-gray-200 { color: #374151 !important; }
+          .allergen-warning-box { background-color: rgba(245, 158, 11, 0.2) !important; }
+          .allergen-warning-title { color: #A16207 !important; }
+          .allergen-warning-text { color: #1F2937 !important; }
         `
       }
     }

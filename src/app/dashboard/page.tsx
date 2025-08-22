@@ -245,212 +245,228 @@ export default function Dashboard() {
         <div className="flex-1">
           <div className="p-8">
           {selectedTab === 'overview' && (
-            <div className="space-y-6">
-              {/* Mobile-First Quick Actions */}
-              <div className="text-center pt-12">
-                <h2 className="text-4xl lg:text-5xl text-white mb-6" style={{ fontWeight: 900 }}>Ready to order?</h2>
-                <p className="text-gray-400 text-base lg:text-lg mb-10">Get instant menu recommendations</p>
-                
-                {/* Action Buttons */}
-                <div className="grid grid-cols-1 gap-3">
-                  <button 
-                    className="p-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 transform hover:scale-105"
-                    suppressHydrationWarning={true}
-                    style={{
-                      fontWeight: 700,
-                      background: 'linear-gradient(135deg, #6B7280 0%, #4B5563 100%)',
-                      boxShadow: 'inset 0 1px 2px rgba(255, 255, 255, 0.1), inset 0 -1px 2px rgba(0, 0, 0, 0.2)',
-                      color: '#F3F4F6'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.background = 'linear-gradient(135deg, #4B5563 0%, #374151 100%)'
-                      e.currentTarget.style.boxShadow = 'inset 0 1px 2px rgba(255, 255, 255, 0.15), inset 0 -1px 2px rgba(0, 0, 0, 0.25)'
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = 'linear-gradient(135deg, #6B7280 0%, #4B5563 100%)'
-                      e.currentTarget.style.boxShadow = 'inset 0 1px 2px rgba(255, 255, 255, 0.1), inset 0 -1px 2px rgba(0, 0, 0, 0.2)'
-                    }}
-                  >
-                    <CameraIcon className="w-6 h-6" />
-                    Menu Camera
-                  </button>
-                  <div className="grid grid-cols-2 gap-3">
-                    <button 
-                      className="p-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 transform hover:scale-105"
-                      data-gradient-bg="true"
-                      suppressHydrationWarning={true}
-                      style={{
-                        fontWeight: 700,
-                        background: 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)',
-                        boxShadow: 'inset 0 1px 2px rgba(255, 255, 255, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1)',
-                        color: '#0A0B0D'
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.background = 'linear-gradient(135deg, #22FFD3 0%, #00FFB8 100%)'
-                        e.currentTarget.style.boxShadow = 'inset 0 1px 2px rgba(255, 255, 255, 0.3), inset 0 -1px 2px rgba(0, 0, 0, 0.15)'
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.background = 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)'
-                        e.currentTarget.style.boxShadow = 'inset 0 1px 2px rgba(255, 255, 255, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1)'
-                      }}
-                    >
-                      <MagnifyingGlassIcon className="w-6 h-6" />
-                      Search for Restaurant
-                    </button>
-                    <button 
-                      className="p-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 transform hover:scale-105"
-                      data-gradient-bg="true"
-                      suppressHydrationWarning={true}
-                      style={{
-                        fontWeight: 700,
-                        background: 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)',
-                        boxShadow: 'inset 0 1px 2px rgba(255, 255, 255, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1)',
-                        color: '#0A0B0D'
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.background = 'linear-gradient(135deg, #22FFD3 0%, #00FFB8 100%)'
-                        e.currentTarget.style.boxShadow = 'inset 0 1px 2px rgba(255, 255, 255, 0.3), inset 0 -1px 2px rgba(0, 0, 0, 0.15)'
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.background = 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)'
-                        e.currentTarget.style.boxShadow = 'inset 0 1px 2px rgba(255, 255, 255, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1)'
-                      }}
-                    >
-                      <LinkIcon className="w-6 h-6" />
-                      Paste Menu Link
-                    </button>
+            <div className="space-y-8">
+              {/* Quick Actions & Chatbot - Desktop Flex Layout */}
+              <div className="xl:flex xl:gap-8 xl:items-stretch space-y-8 xl:space-y-0">
+                {/* Ready to Order Component */}
+                <div className="xl:flex-1">
+                  <div className="text-center pt-12">
+                    <h2 className="text-4xl lg:text-5xl text-white mb-6" style={{ fontWeight: 900 }}>Ready to order?</h2>
+                    <p className="text-gray-400 text-base lg:text-lg mb-10">Get instant menu recommendations</p>
+                    
+                    {/* Action Buttons */}
+                    <div className="grid grid-cols-1 gap-3">
+                      <button 
+                        className="p-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 transform hover:scale-105"
+                        suppressHydrationWarning={true}
+                        style={{
+                          fontWeight: 700,
+                          background: 'linear-gradient(135deg, #6B7280 0%, #4B5563 100%)',
+                          boxShadow: 'inset 0 1px 2px rgba(255, 255, 255, 0.1), inset 0 -1px 2px rgba(0, 0, 0, 0.2)',
+                          color: '#F3F4F6'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.background = 'linear-gradient(135deg, #4B5563 0%, #374151 100%)'
+                          e.currentTarget.style.boxShadow = 'inset 0 1px 2px rgba(255, 255, 255, 0.15), inset 0 -1px 2px rgba(0, 0, 0, 0.25)'
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.background = 'linear-gradient(135deg, #6B7280 0%, #4B5563 100%)'
+                          e.currentTarget.style.boxShadow = 'inset 0 1px 2px rgba(255, 255, 255, 0.1), inset 0 -1px 2px rgba(0, 0, 0, 0.2)'
+                        }}
+                      >
+                        <CameraIcon className="w-6 h-6" />
+                        Menu Camera
+                      </button>
+                      <div className="grid grid-cols-2 gap-3">
+                        <button 
+                          className="p-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 transform hover:scale-105"
+                          data-gradient-bg="true"
+                          suppressHydrationWarning={true}
+                          style={{
+                            fontWeight: 700,
+                            background: 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)',
+                            boxShadow: 'inset 0 1px 2px rgba(255, 255, 255, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1)',
+                            color: '#0A0B0D'
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.background = 'linear-gradient(135deg, #22FFD3 0%, #00FFB8 100%)'
+                            e.currentTarget.style.boxShadow = 'inset 0 1px 2px rgba(255, 255, 255, 0.3), inset 0 -1px 2px rgba(0, 0, 0, 0.15)'
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.background = 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)'
+                            e.currentTarget.style.boxShadow = 'inset 0 1px 2px rgba(255, 255, 255, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1)'
+                          }}
+                        >
+                          <MagnifyingGlassIcon className="w-6 h-6" />
+                          Search for Restaurant
+                        </button>
+                        <button 
+                          className="p-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 transform hover:scale-105"
+                          data-gradient-bg="true"
+                          suppressHydrationWarning={true}
+                          style={{
+                            fontWeight: 700,
+                            background: 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)',
+                            boxShadow: 'inset 0 1px 2px rgba(255, 255, 255, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1)',
+                            color: '#0A0B0D'
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.background = 'linear-gradient(135deg, #22FFD3 0%, #00FFB8 100%)'
+                            e.currentTarget.style.boxShadow = 'inset 0 1px 2px rgba(255, 255, 255, 0.3), inset 0 -1px 2px rgba(0, 0, 0, 0.15)'
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.background = 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)'
+                            e.currentTarget.style.boxShadow = 'inset 0 1px 2px rgba(255, 255, 255, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1)'
+                          }}
+                        >
+                          <LinkIcon className="w-6 h-6" />
+                          Paste Menu Link
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Chatbot Component */}
+                <div className="xl:flex-1 xl:flex xl:flex-col xl:pt-12">
+                  <div className="bg-dark-100/60 backdrop-blur-md rounded-3xl p-6 border border-white/10 xl:flex-1 xl:flex xl:flex-col" style={{ boxShadow: '0 25px 50px rgba(0, 0, 0, 0.4), 0 8px 20px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.02)' }}>
+                    <div className="text-center mb-6">
+                      <h3 className="text-2xl font-bold text-white mb-2">Ask Palate AI</h3>
+                      <p className="text-gray-400 text-sm">Get instant answers about menus, dietary restrictions, and recommendations</p>
+                    </div>
+                    <div className="relative xl:flex-1 xl:flex xl:items-center">
+                      <input
+                        type="text"
+                        placeholder="Ask me anything about food, menus, or restaurants..."
+                        className="w-full p-4 pr-12 bg-dark-200/50 border border-white/20 rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:border-primary-400/50 focus:bg-dark-200/70 transition-all duration-300 text-ellipsis overflow-hidden"
+                        suppressHydrationWarning={true}
+                        style={{
+                          fontSize: '16px',
+                          minHeight: '56px'
+                        }}
+                      />
+                      <button 
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 p-2 rounded-xl transition-all duration-300 hover:scale-105"
+                        data-gradient-bg="true"
+                        style={{
+                          background: 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)',
+                          boxShadow: 'inset 0 1px 2px rgba(255, 255, 255, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1)'
+                        }}
+                      >
+                        <svg className="w-5 h-5 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                        </svg>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              {/* Chatbot Component */}
-              <div className="py-8">
-                <div className="bg-dark-100/60 backdrop-blur-md rounded-3xl p-6 border border-white/10" style={{ boxShadow: '0 25px 50px rgba(0, 0, 0, 0.4), 0 8px 20px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.02)' }}>
-                  <div className="text-center mb-6">
-                    <h3 className="text-2xl font-bold text-white mb-2">Ask Palate AI</h3>
-                    <p className="text-gray-400 text-sm">Get instant answers about menus, dietary restrictions, and recommendations</p>
-                  </div>
-                  <div className="relative">
-                    <input
-                      type="text"
-                      placeholder="Ask me anything about food, menus, or restaurants..."
-                      className="w-full p-4 pr-12 bg-dark-200/50 border border-white/20 rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:border-primary-400/50 focus:bg-dark-200/70 transition-all duration-300 text-ellipsis overflow-hidden"
-                      suppressHydrationWarning={true}
-                      style={{
-                        fontSize: '16px',
-                        minHeight: '56px'
-                      }}
-                    />
-                    <button 
-                      className="absolute right-3 top-1/2 transform -translate-y-1/2 p-2 rounded-xl transition-all duration-300 hover:scale-105"
-                      data-gradient-bg="true"
-                      style={{
-                        background: 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)',
-                        boxShadow: 'inset 0 1px 2px rgba(255, 255, 255, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1)'
-                      }}
-                    >
-                      <svg className="w-5 h-5 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              {/* Stats Grid - Mobile Optimized */}
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                <div className="bg-dark-100/60 backdrop-blur-md rounded-2xl p-4 border border-white/10" style={{ boxShadow: '0 25px 50px rgba(0, 0, 0, 0.4), 0 8px 20px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.08)' }}>
-                  <div className="text-center">
-                    <div className="w-10 h-10 bg-blue-500/20 rounded-xl flex items-center justify-center mx-auto mb-2">
-                      <DocumentTextIcon className="w-5 h-5 text-blue-400" />
+              {/* Stats & Recent Analyses - XL Flex Layout */}
+              <div className="xl:flex xl:gap-8 xl:items-stretch space-y-6 xl:space-y-0">
+                {/* Recent Analyses Component */}
+                <div className="xl:flex-1 xl:order-1">
+                  <div className="bg-dark-100/60 backdrop-blur-md rounded-2xl border border-white/10 xl:h-full" style={{ boxShadow: '0 30px 60px rgba(0, 0, 0, 0.4), 0 12px 25px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.02)' }}>
+                    <div className="p-4 border-b border-white/10">
+                      <h3 className="text-lg font-semibold text-white">Recent Analyses</h3>
                     </div>
-                    <p className="text-2xl font-bold text-white">{stats.totalAnalyses}</p>
-                    <p className="text-xs text-gray-400">Analyses</p>
-                  </div>
-                </div>
-
-                <div className="bg-dark-100/60 backdrop-blur-md rounded-2xl p-4 border border-white/10" style={{ boxShadow: '0 25px 50px rgba(0, 0, 0, 0.4), 0 8px 20px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.08)' }}>
-                  <div className="text-center">
-                    <div className="w-10 h-10 bg-green-500/20 rounded-xl flex items-center justify-center mx-auto mb-2">
-                      <HeartIcon className="w-5 h-5 text-green-400" />
+                    <div className="p-4">
+                      <div className="space-y-2">
+                        {recentAnalyses.map((analysis) => (
+                          <div key={analysis.id} className="py-2 pl-4 pr-2 border border-white/20 bg-dark-100 rounded-xl hover:border-primary-400 transition-colors h-16 flex items-center">
+                            <div className="flex items-center justify-between w-full">
+                              <div className="flex flex-col">
+                                <h4 className="font-bold text-white text-sm">{analysis.restaurant}</h4>
+                                <div className="flex items-center gap-2 text-xs text-gray-400">
+                                  <span className="flex items-center gap-1">
+                                    <ClockIcon className="w-3 h-3" />
+                                    {new Date(analysis.date).toLocaleDateString()}
+                                  </span>
+                                  <span className="flex items-center gap-1">
+                                    <StarIcon className="w-3 h-3 text-green-400" />
+                                    {analysis.matches}
+                                  </span>
+                                  {analysis.warnings > 0 && (
+                                    <span className="flex items-center gap-1">
+                                      <ExclamationTriangleIcon className="w-3 h-3 text-yellow-400" />
+                                      {analysis.warnings}
+                                    </span>
+                                  )}
+                                </div>
+                              </div>
+                              <button 
+                                onClick={() => router.push(`/restaurant/${analysis.id}`)}
+                                className="text-sm font-semibold px-4 rounded-lg transition-all duration-300 transform hover:scale-105 h-12 flex items-center ml-3"
+                                data-gradient-bg="true"
+                                suppressHydrationWarning={true}
+                                style={{
+                                  background: 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)',
+                                  boxShadow: 'inset 0 1px 1px rgba(255, 255, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.1)',
+                                  color: '#0A0B0D'
+                                }}
+                                onMouseEnter={(e) => {
+                                  e.currentTarget.style.background = 'linear-gradient(135deg, #22FFD3 0%, #00FFB8 100%)'
+                                  e.currentTarget.style.boxShadow = 'inset 0 1px 1px rgba(255, 255, 255, 0.3), inset 0 -1px 1px rgba(0, 0, 0, 0.15)'
+                                }}
+                                onMouseLeave={(e) => {
+                                  e.currentTarget.style.background = 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)'
+                                  e.currentTarget.style.boxShadow = 'inset 0 1px 1px rgba(255, 255, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.1)'
+                                }}
+                              >
+                                View
+                              </button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                    <p className="text-2xl font-bold text-white">{stats.favoriteRestaurants}</p>
-                    <p className="text-xs text-gray-400">Favorites</p>
                   </div>
                 </div>
 
-                <div className="bg-dark-100/60 backdrop-blur-md rounded-2xl p-4 border border-white/10" style={{ boxShadow: '0 25px 50px rgba(0, 0, 0, 0.4), 0 8px 20px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.08)' }}>
-                  <div className="text-center">
-                    <div className="w-10 h-10 bg-purple-500/20 rounded-xl flex items-center justify-center mx-auto mb-2">
-                      <StarIcon className="w-5 h-5 text-purple-400" />
-                    </div>
-                    <p className="text-2xl font-bold text-white">{stats.savedDishes}</p>
-                    <p className="text-xs text-gray-400">Saved</p>
-                  </div>
-                </div>
-
-                <div className="bg-dark-100/60 backdrop-blur-md rounded-2xl p-4 border border-white/10" style={{ boxShadow: '0 25px 50px rgba(0, 0, 0, 0.4), 0 8px 20px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.08)' }}>
-                  <div className="text-center">
-                    <div className="w-10 h-10 bg-orange-500/20 rounded-xl flex items-center justify-center mx-auto mb-2">
-                      <SparklesIcon className="w-5 h-5 text-orange-400" />
-                    </div>
-                    <p className="text-lg font-bold text-white truncate">{stats.topDish}</p>
-                    <p className="text-xs text-gray-400">Top Dish</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Recent Analyses - Mobile Optimized */}
-              <div className="bg-dark-100/60 backdrop-blur-md rounded-2xl border border-white/10 mt-12" style={{ boxShadow: '0 30px 60px rgba(0, 0, 0, 0.4), 0 12px 25px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.02)' }}>
-                <div className="p-4 border-b border-white/10">
-                  <h3 className="text-lg font-semibold text-white">Recent Analyses</h3>
-                </div>
-                <div className="p-4">
-                  <div className="space-y-3">
-                    {recentAnalyses.map((analysis) => (
-                      <div key={analysis.id} className="p-4 border border-dark-300 bg-dark-100 rounded-xl hover:border-primary-400 transition-colors">
-                        <div className="flex items-start justify-between mb-2">
-                          <h4 className="font-bold text-white text-lg">{analysis.restaurant}</h4>
-                          <button 
-                            onClick={() => router.push(`/restaurant/${analysis.id}`)}
-                            className="text-sm font-semibold px-3 py-1.5 rounded-lg transition-all duration-300 transform hover:scale-105"
-                            data-gradient-bg="true"
-                            suppressHydrationWarning={true}
-                            style={{
-                              background: 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)',
-                              boxShadow: 'inset 0 1px 1px rgba(255, 255, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.1)',
-                              color: '#0A0B0D'
-                            }}
-                            onMouseEnter={(e) => {
-                              e.currentTarget.style.background = 'linear-gradient(135deg, #22FFD3 0%, #00FFB8 100%)'
-                              e.currentTarget.style.boxShadow = 'inset 0 1px 1px rgba(255, 255, 255, 0.3), inset 0 -1px 1px rgba(0, 0, 0, 0.15)'
-                            }}
-                            onMouseLeave={(e) => {
-                              e.currentTarget.style.background = 'linear-gradient(135deg, #00FFB8 0%, #22FFD3 100%)'
-                              e.currentTarget.style.boxShadow = 'inset 0 1px 1px rgba(255, 255, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.1)'
-                            }}
-                          >
-                            View
-                          </button>
-                        </div>
-                        <div className="flex items-center gap-3 text-sm text-gray-400">
-                          <span className="flex items-center gap-1">
-                            <ClockIcon className="w-4 h-4" />
-                            {new Date(analysis.date).toLocaleDateString()}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <StarIcon className="w-4 h-4 text-green-400" />
-                            {analysis.matches}
-                          </span>
-                          {analysis.warnings > 0 && (
-                            <span className="flex items-center gap-1">
-                              <ExclamationTriangleIcon className="w-4 h-4 text-yellow-400" />
-                              {analysis.warnings}
-                            </span>
-                          )}
+                {/* Stats Grid Component */}
+                <div className="xl:flex-1 xl:order-2">
+                  <div className="bg-dark-100/60 backdrop-blur-md rounded-2xl border border-white/10 xl:h-full xl:flex xl:items-center xl:justify-center" style={{ boxShadow: '0 30px 60px rgba(0, 0, 0, 0.4), 0 12px 25px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.02)' }}>
+                    <div className="grid grid-cols-2 gap-4 w-full p-4">
+                      <div className="bg-dark-100/60 backdrop-blur-md rounded-2xl p-4 border border-white/10" style={{ boxShadow: '0 25px 50px rgba(0, 0, 0, 0.4), 0 8px 20px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.08)' }}>
+                        <div className="text-center">
+                          <div className="w-10 h-10 bg-blue-500/20 rounded-xl flex items-center justify-center mx-auto mb-2">
+                            <DocumentTextIcon className="w-5 h-5 text-blue-400" />
+                          </div>
+                          <p className="text-2xl font-bold text-white">{stats.totalAnalyses}</p>
+                          <p className="text-xs text-gray-400">Analyses</p>
                         </div>
                       </div>
-                    ))}
+
+                      <div className="bg-dark-100/60 backdrop-blur-md rounded-2xl p-4 border border-white/10" style={{ boxShadow: '0 25px 50px rgba(0, 0, 0, 0.4), 0 8px 20px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.08)' }}>
+                        <div className="text-center">
+                          <div className="w-10 h-10 bg-green-500/20 rounded-xl flex items-center justify-center mx-auto mb-2">
+                            <HeartIcon className="w-5 h-5 text-green-400" />
+                          </div>
+                          <p className="text-2xl font-bold text-white">{stats.favoriteRestaurants}</p>
+                          <p className="text-xs text-gray-400">Favorites</p>
+                        </div>
+                      </div>
+
+                      <div className="bg-dark-100/60 backdrop-blur-md rounded-2xl p-4 border border-white/10" style={{ boxShadow: '0 25px 50px rgba(0, 0, 0, 0.4), 0 8px 20px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.08)' }}>
+                        <div className="text-center">
+                          <div className="w-10 h-10 bg-purple-500/20 rounded-xl flex items-center justify-center mx-auto mb-2">
+                            <StarIcon className="w-5 h-5 text-purple-400" />
+                          </div>
+                          <p className="text-2xl font-bold text-white">{stats.savedDishes}</p>
+                          <p className="text-xs text-gray-400">Saved</p>
+                        </div>
+                      </div>
+
+                      <div className="bg-dark-100/60 backdrop-blur-md rounded-2xl p-4 border border-white/10" style={{ boxShadow: '0 25px 50px rgba(0, 0, 0, 0.4), 0 8px 20px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.08)' }}>
+                        <div className="text-center">
+                          <div className="w-10 h-10 bg-orange-500/20 rounded-xl flex items-center justify-center mx-auto mb-2">
+                            <SparklesIcon className="w-5 h-5 text-orange-400" />
+                          </div>
+                          <p className="text-lg font-bold text-white truncate">{stats.topDish}</p>
+                          <p className="text-xs text-gray-400">Top Dish</p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -610,7 +626,7 @@ export default function Dashboard() {
                 </div>
               </div>
 
-              {/* Stats Grid - Mobile Optimized */}
+              {/* Stats Grid - Mobile Layout */}
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-dark-100/60 backdrop-blur-md rounded-2xl p-4 border border-white/10" style={{ boxShadow: '0 25px 50px rgba(0, 0, 0, 0.4), 0 8px 20px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.08)' }}>
                   <div className="text-center">
@@ -659,14 +675,32 @@ export default function Dashboard() {
                   <h3 className="text-lg font-semibold text-white">Recent Analyses</h3>
                 </div>
                 <div className="p-4">
-                  <div className="space-y-3">
+                  <div className="space-y-2">
                     {recentAnalyses.map((analysis) => (
-                      <div key={analysis.id} className="p-4 border border-dark-300 bg-dark-100 rounded-xl hover:border-primary-400 transition-colors">
-                        <div className="flex items-start justify-between mb-2">
-                          <h4 className="font-bold text-white text-lg">{analysis.restaurant}</h4>
+                      <div key={analysis.id} className="py-2 pl-4 pr-2 border border-white/20 bg-dark-100 rounded-xl hover:border-primary-400 transition-colors h-16 flex items-center">
+                        <div className="flex items-center justify-between w-full">
+                          <div className="flex flex-col">
+                            <h4 className="font-bold text-white text-sm">{analysis.restaurant}</h4>
+                            <div className="flex items-center gap-2 text-xs text-gray-400">
+                              <span className="flex items-center gap-1">
+                                <ClockIcon className="w-3 h-3" />
+                                {new Date(analysis.date).toLocaleDateString()}
+                              </span>
+                              <span className="flex items-center gap-1">
+                                <StarIcon className="w-3 h-3 text-green-400" />
+                                {analysis.matches}
+                              </span>
+                              {analysis.warnings > 0 && (
+                                <span className="flex items-center gap-1">
+                                  <ExclamationTriangleIcon className="w-3 h-3 text-yellow-400" />
+                                  {analysis.warnings}
+                                </span>
+                              )}
+                            </div>
+                          </div>
                           <button 
                             onClick={() => router.push(`/restaurant/${analysis.id}`)}
-                            className="text-sm font-semibold px-3 py-1.5 rounded-lg transition-all duration-300 transform hover:scale-105"
+                            className="text-sm font-semibold px-4 rounded-lg transition-all duration-300 transform hover:scale-105 h-12 flex items-center ml-3"
                             data-gradient-bg="true"
                             suppressHydrationWarning={true}
                             style={{
@@ -685,22 +719,6 @@ export default function Dashboard() {
                           >
                             View
                           </button>
-                        </div>
-                        <div className="flex items-center gap-3 text-sm text-gray-400">
-                          <span className="flex items-center gap-1">
-                            <ClockIcon className="w-4 h-4" />
-                            {new Date(analysis.date).toLocaleDateString()}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <StarIcon className="w-4 h-4 text-green-400" />
-                            {analysis.matches}
-                          </span>
-                          {analysis.warnings > 0 && (
-                            <span className="flex items-center gap-1">
-                              <ExclamationTriangleIcon className="w-4 h-4 text-yellow-400" />
-                              {analysis.warnings}
-                            </span>
-                          )}
                         </div>
                       </div>
                     ))}

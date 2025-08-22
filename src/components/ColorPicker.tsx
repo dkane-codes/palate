@@ -48,6 +48,21 @@ export default function ColorPicker() {
   const [isOpen, setIsOpen] = useState(false)
   const [isDarkMode, setIsDarkMode] = useState(true)
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement
+      if (isOpen && !target.closest('.color-picker-container')) {
+        setIsOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isOpen])
+
   const applyTheme = (isDark: boolean) => {
     if (typeof window === 'undefined') return
     
@@ -206,7 +221,7 @@ export default function ColorPicker() {
 
   return (
     <div className="flex gap-2">
-      <div className="relative">
+      <div className="relative color-picker-container">
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="w-10 h-10 rounded-lg border-2 border-white/20 backdrop-blur-md flex items-center justify-center hover:border-white/40 transition-all duration-300 transform hover:scale-105 p-1"
@@ -218,16 +233,18 @@ export default function ColorPicker() {
 
       {isOpen && (
         <div 
-          className="absolute top-12 left-0 bg-dark-100/90 backdrop-blur-md rounded-xl border border-white/10 p-3 z-50"
-          style={{ boxShadow: '0 20px 40px rgba(0, 0, 0, 0.4), 0 8px 16px rgba(0, 0, 0, 0.2)' }}
+          className="absolute top-12 left-0 bg-dark-100/95 backdrop-blur-md rounded-xl border border-white/10 p-3 z-50"
+          style={{ boxShadow: '0 20px 40px rgba(0, 0, 0, 0.4), 0 8px 16px rgba(0, 0, 0, 0.2)', backgroundColor: isDarkMode ? 'rgba(39, 39, 42, 0.95)' : 'rgba(255, 255, 255, 0.95)' }}
         >
           <div className="grid grid-cols-1 gap-2 min-w-[120px]">
             {colorOptions.map((color) => (
               <button
                 key={color.name}
                 onClick={() => handleColorChange(color)}
-                className={`flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 transition-colors ${
-                  selectedColor === color.name ? 'bg-white/10' : ''
+                className={`flex items-center gap-3 p-2 rounded-lg transition-colors ${
+                  selectedColor === color.name 
+                    ? (isDarkMode ? 'bg-white/10' : 'bg-black/10')
+                    : (isDarkMode ? 'hover:bg-white/5' : 'hover:bg-black/15')
                 }`}
               >
                 <div 
@@ -250,12 +267,13 @@ export default function ColorPicker() {
         onClick={toggleTheme}
         className="w-10 h-10 rounded-lg border-2 backdrop-blur-md flex items-center justify-center transition-all duration-300 transform hover:scale-105 p-1"
         style={{ 
-          background: isDarkMode ? 'black' : 'white',
+          background: isDarkMode ? 'white' : '#27272A',
           borderColor: currentColor.primary,
+          color: isDarkMode ? '#000000' : '#FFFFFF'
         }}
         title={`Switch to ${isDarkMode ? 'light' : 'dark'} mode`}
       >
-        <PalateLogo className={`w-7 h-7 ${isDarkMode ? 'text-white' : 'text-black'}`} />
+        <PalateLogo className="w-7 h-7" />
       </button>
     </div>
   )
